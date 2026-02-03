@@ -14,8 +14,8 @@ export default defineConfig({
       {
         text: '年度计划',
         items: [
-          { text: '2026年年度计划', link: '/views/javascript/ES6-trip' },
-          { text: '2027年年度计划', link: '/views/javascript/ES6-trip' },
+          { text: '2026年年度计划', link: '/views/plan/2026' },
+          { text: '2027年年度计划', link: '/views/plan/2027' },
         ],
       },
       {
@@ -89,6 +89,6 @@ export default defineConfig({
         ],
       },
     ],
-    socialLinks: [{ icon: 'github', link: 'https://github.com/vuejs/vitepress' }],
+    socialLinks: [{ icon: 'github', link: 'https://github.com/mh0904/mh-note' }],
   },
 })
