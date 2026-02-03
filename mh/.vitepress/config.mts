@@ -10,8 +10,14 @@ export default defineConfig({
       { text: 'javascript', link: '/views/javascript/basics' },
       { text: 'react', link: '/views/react/basics' },
     ],
-
     sidebar: [
+      {
+        text: '年度计划',
+        items: [
+          { text: '2026年年度计划', link: '/views/javascript/ES6-trip' },
+          { text: '2027年年度计划', link: '/views/javascript/ES6-trip' },
+        ],
+      },
       {
         text: 'JS文档',
         items: [
@@ -83,7 +89,6 @@ export default defineConfig({
         ],
       },
     ],
-
     socialLinks: [{ icon: 'github', link: 'https://github.com/vuejs/vitepress' }],
   },
 })
