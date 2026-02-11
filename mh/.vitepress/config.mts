@@ -7,12 +7,17 @@ export default defineConfig({
   appearance: true,
   head: [['link', { rel: 'icon', href: '/favicon.ico' }]],
   themeConfig: {
+    siteTitle: 'MH', // 站点标题
+    logo: '/me.jpg', // 站点图标
     lastUpdated: {
       text: '最后更新时间',
       formatOptions: {
         dateStyle: 'full',
         timeStyle: 'short',
       },
+    },
+    search: {
+      provider: 'local', // 本地搜索
     },
     nav: [
       { text: 'Home', link: '/' },
@@ -106,5 +111,10 @@ export default defineConfig({
       },
       { icon: 'github', link: 'https://github.com/mh0904/mh-note' },
     ],
+    footer: {
+      message:
+        'Released under the <a href="https://github.com/vuejs/vitepress/blob/main/LICENSE">MIT License</a>.',
+      copyright: 'Copyright © 2019-present <a href="https://github.com/yyx990803">Evan You</a>',
+    },
   },
 })
