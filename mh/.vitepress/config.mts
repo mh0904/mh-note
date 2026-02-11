@@ -3,7 +3,9 @@ import { defineConfig } from 'vitepress'
 export default defineConfig({
   title: 'mh',
   description: 'mh note',
+
   appearance: true,
+  head: [['link', { rel: 'icon', href: '/favicon.ico' }]],
   themeConfig: {
     nav: [
       { text: 'Home', link: '/' },
