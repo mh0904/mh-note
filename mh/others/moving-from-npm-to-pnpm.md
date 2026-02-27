@@ -17,7 +17,7 @@ pnpm 的做法：它会将所有的依赖包存储在全局的一个 Content-add
 2. 告别“依赖地狱”：严格的依赖管理
    npm 在 v3 版本后引入了扁平化结构。这虽然解决了嵌套层级过深的问题，却引入了幽灵依赖（Phantom dependencies）：
 
-什么是幽灵依赖？ 你明明没有在 package.json 里声明 lodash，但因为你依赖的某个包用了它，你竟然可以在代码里直接 import \_ from 'lodash'。
+什么是幽灵依赖？ 你明明没有在 package.json 里声明 lodash，但因为你依赖的某个包用了它，你竟然可以在代码里直接 `import _ from 'lodash'`。
 
 pnpm 坚决说不。
 它利用符号链接（Symbolic Link）构建了一套高度契合 Node.js 加载机制的目录结构。如果你没在 package.json 里显式声明，你就别想用它。这种**“严格性”**让项目的稳定性得到了质的飞跃，有效避免了由于底层依赖升级导致的线上崩溃。
@@ -33,14 +33,15 @@ pnpm 坚决说不。
 
 得益于它不需要像 npm 那样频繁地读写磁盘文件，即使是在没有任何缓存的情况下，pnpm 的速度通常也是 npm 的 2-3 倍。
 
-4. 完美契合 Monorepo（大仓库）
-   现在的项目越来越多地采用 Monorepo 架构。npm 的 workspaces 虽然能用，但在处理子项目间的依赖隔离和共享时，体验极其笨重。
+4. 完美契合 `Monorepo`
+
+   现在的项目越来越多地采用 `Monorepo` 架构。npm 的 workspaces 虽然能用，但在处理子项目间的依赖隔离和共享时，体验极其笨重。
 
 pnpm 天生自带对 Workspace 的顶级支持：
 
 简单的 pnpm-workspace.yaml 配置。
 
-极其方便的指令：pnpm -r exec <command>（递归执行所有子项目）。
+极其方便的指令：`pnpm -r exec <command>`（递归执行所有子项目）。
 
 过滤机制：只针对改动的项目进行安装和构建。
 
