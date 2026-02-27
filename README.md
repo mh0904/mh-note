@@ -2,7 +2,7 @@
 
 ## 项目简介
 
-mh-note 是一个使用 VitePress 构建的技术笔记网站，专注于前端开发相关技术文档的整理与分享。
+blog 是一个使用 VitePress 构建的技术笔记网站，专注于前端开发相关技术文档的整理与分享。
 
 ## 项目结构
 
@@ -54,13 +54,13 @@ blog/
 ### 安装依赖
 
 ```bash
-npm install
+pnpm install
 ```
 
 ### 启动开发服务器
 
 ```bash
-npm run dev
+pnpm run dev
 ```
 
 然后访问 http://localhost:5173 查看网站。
@@ -68,13 +68,13 @@ npm run dev
 ### 构建生产版本
 
 ```bash
-npm run build
+pnpm run build
 ```
 
 ### 预览生产构建
 
 ```bash
-npm run preview
+pnpm run preview
 ```
 
 ## 部署
