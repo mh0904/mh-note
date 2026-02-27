@@ -1,3 +1,4 @@
 node_modules
 
-mh/.vitepress/cache/deps
+# 忽略 mh 目录下的所有 vitepress 缓存
+mh/.vitepress/cache/
