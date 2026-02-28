@@ -7,6 +7,14 @@ export default defineConfig({
   lastUpdated: true, // 开启最近更新时间
   appearance: true,
   head: [['link', { rel: 'icon', href: '/favicon.ico' }]],
+  vite: {
+    server: {
+      watch: {
+        // 确保监听 mh 文件夹下的所有 md 文件变动  目前这里有问题！！！！
+        ignored: ['!**/mh/**'],
+      },
+    },
+  },
   themeConfig: {
     siteTitle: 'MH', // 站点标题
     logo: '/me.jpg', // 站点图标
@@ -17,6 +25,7 @@ export default defineConfig({
         timeStyle: 'short',
       },
     },
+
     // 使用插件自动生成侧边栏
     sidebar: generateSidebar({
       documentRootPath: 'mh',
