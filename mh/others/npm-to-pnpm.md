@@ -33,11 +33,11 @@ highlight: vs2015
 
 1.  新建文件夹并执行：`npm install element-plus`。
 2.  检查你的 `package.json`：你会发现只有 `element-plus`。
-    ![alt text](image.png)
+    ![alt text](images/npm-to-pnpm.png)
 3.  检查 `node_modules`：你会发现多出了 `async-validator` 文件夹。
-    ![alt text](images/image-1.png)
+    ![alt text](images/npm-to-pnpm-1.png)
 4.  你可以在代码里直接写 `import Schema from 'async-validator'`。因为 `npm` 的扁平化布局把这个“孙子辈”的依赖提到了根目录，导致你可以非法访问它。
-    ![alt text](images/image-6.png)
+    ![alt text](images/npm-to-pnpm-6.png)
 5.  如果有一天你升级了`element-plus`，同时 `element-plus` 的表单校验功能不再依赖 `async-validator`。这个时候你的代码在没有任何预警的情况下直接崩溃。
 
 说完了`npm`带来的问题，下面谈一谈 `pnpm` 是如何解决的吧！！！
@@ -49,13 +49,13 @@ highlight: vs2015
 如果你现在把 `node_modules` 删掉，改用 `pnpm install element-plus`。
 
 1.  pnpm 依然会下载 `async-validator`，但它会把它藏在 `.pnpm` 的虚拟存储池中。这种基于内容寻址的虚拟存储方式是通过**硬链接**的方式进行访问。
-    ![alt text](images/image-7.png)
+    ![alt text](images/npm-to-pnpm-7.png)
 
 2.  同时在 `node_modules` 的根目录下，`pnpm` 只创建 `element-plus` 的**软链接**。
-    ![alt text](images/image-10.png)
+    ![alt text](images/npm-to-pnpm-10.png)
 
 3.  当你运行 `test.js` 时，`Node.js` 找不到根目录下的 `async-validator`，会立刻报错提醒你。这强迫你必须显式地 `pnpm add async-validator`，从而保证了项目的稳定性。
-    ![alt text](images/image-8.png)
+    ![alt text](images/npm-to-pnpm-8.png)
 
 提示： 如果你不太明白什么是软硬链接，可以通过下面的解释进行解惑。
 
@@ -64,18 +64,18 @@ highlight: vs2015
 在理解什么是硬链接之前，需要理解什么是 `inode`？
 
 解释：在文件系统中，`inode` 是文件的唯一身份标识，存储了文件的元信息（如权限、大小、数据块位置）。而文件名只是指向这个标识的一个“标签”。 `inode` 像一个人的身份证号，而文件名像一个人的姓名，姓名可以更改或者有别称和小名，但是身份证号无法更改，具有唯一性。
-![alt text](images/image-11.png)
+![alt text](images/npm-to-pnpm-11.png)
 
 在理解了什么是 `inode`，就可以理解硬链接的本质。在 `pnpm` 的机制中，`.pnpm` 目录下的包是通过硬链接与全局 `Store` 关联的，这意味着它们拥有相同的 `inode` 号码，指向磁盘上同一块物理数据。换句话说你看到的 `.pnpm` 目录下的文件本质和当前磁盘下的 `.pnpm-store` 下的文件是相同的物理数据。所有即使你有100个项目都用到了相同的包，磁盘在上物理存储的代码只有一份。
-![alt text](images/image-9.png)
+![alt text](images/npm-to-pnpm-9.png)
 
 ### 如何理解软链接？
 
 软链接又叫符号链接，软链接的本质是一个链接文件，指向源文件的地址，类似索引或者指针。修改源文件内容，软链接的内容会随之改变，删除源文件会导致软链接的访问失效。下图是软链接和源文件的关系。
-![alt text](images/image-12.png)
+![alt text](images/npm-to-pnpm-12.png)
 
 例如你看到的 `node_modules` 根目录下的 `vue` 对应的软链接目标文件是：`node_modules/.pnpm/vue@3.5.29/node_modules/vue`
-![alt text](images/image-13.png)
+![alt text](images/npm-to-pnpm-13.png)
 
 接下来通过对比不同的包安装工具的安装速度和磁盘占用情况来解释 `pnpm` 为什么是目前的最优解？
 
@@ -98,7 +98,7 @@ highlight: vs2015
 ### 清除缓存的结果如下
 
 下图是清理缓存后的截图：
-![alt text](images/image-5.png)
+![alt text](images/npm-to-pnpm-5.png)
 
 ### 二. 测试操作步骤记录如下
 
@@ -113,7 +113,7 @@ Measure-Command { npm install vite vue element-plus echarts --no-audit } | Selec
 注： `--no-audit` 是为了排除安全扫描的额外干扰。
 
 记录耗时如下：
-![alt text](images/image-2.png)
+![alt text](images/npm-to-pnpm-2.png)
 
 **2. 测试 `pnpm` 耗时（对比重点）**
 
@@ -125,7 +125,7 @@ Measure-Command { pnpm add vite vue element-plus echarts } | Select-Object Total
 ```
 
 记录耗时如下：
-![alt text](images/image-3.png)
+![alt text](images/npm-to-pnpm-3.png)
 
 **3. 测试 Yarn 耗时**
 
@@ -137,7 +137,7 @@ Measure-Command { yarn add vite vue element-plus echarts } | Select-Object Total
 ```
 
 记录耗时如下：
-![alt text](images/image-4.png)
+![alt text](images/npm-to-pnpm-4.png)
 
 **使用 PowerShell 原生命令 计算文件夹大小并转换为 MB**
 
